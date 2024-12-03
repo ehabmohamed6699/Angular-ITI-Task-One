@@ -1,0 +1,54 @@
+<div class="row container-fluid">
+    <div class="col-3 sidebar bg-dark text-light">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9 product d-flex flex-column align-items-start gap-2">
+        <h1>{{store.name}}</h1>
+        <div class="w-25">
+            <img [src]=store.logo alt="" class="img-fluid">
+        </div>
+        <ng-template #hasPurchased>
+            <h3 class="text-success">Thanks for purchasing our products {{clientName}}</h3>
+        </ng-template>
+        <div class="container-fluid" *ngIf="!isPurchased;else hasPurchased">
+            <h3 class="text-danger" *ngIf="discount !== noDiscount">We offer an explicit discount of {{discount}}</h3>
+            <!-- <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{categories[selectedCategoryId - 1].name}}
+                </button>
+                <ul class="dropdown-menu">
+                <li role="button" *ngFor="let category of categories" (click)="setSelectCategory(category.id)">{{category.name}}</li>
+                </ul>
+            </div> -->
+            <mat-form-field>
+                <mat-label>{{categories[selectedCategoryId - 1].name}}</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let category of categories" (click)="setSelectCategory(category.id)" [value]="category.id">{{category.name}}</mat-option>
+
+                </mat-select>
+              </mat-form-field>
+            <table class="table table stripped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of productList">
+                    <td>{{product?.id}}</td>
+                    <td>{{product?.name}}</td>
+                    <td>{{product?.price}}</td>
+                    <td>{{product?.quantity}}</td>
+                    <td><img src="{{product?.img}}" class="img-thumbnail" width="60px" height="60px" alt=""></td>
+                </tr>
+                </tbody>
+            </table>
+            <input (change)="setUserName($event)" type="text" class="form-control" placeholder="Name">
+            <button (click)="setIsPurchased(true)" class="btn btn-success mb-3">Buy</button>
+        </div>
+    </div>
+</div>

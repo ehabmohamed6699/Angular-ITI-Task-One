@@ -1,0 +1,7 @@
+sidebar, product{
+    height: 90vh;
+}
+
+product{
+    overflow: auto;
+}
